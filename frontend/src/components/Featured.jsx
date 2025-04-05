@@ -9,14 +9,18 @@ const Featured = () => {
       </h1>
 
       {/* Top Feature Card */}
-      <div className="lg:flex lg:gap-3  lg:ml-6 lg:mr-6 lg:p-5">
-        <div className="relative mx-auto rounded-2xl overflow-hidden shadow-2xl max-w-4xl mb-10 ">
-          <img
-            src="/feature.jpg"
-            alt="featurejpg"
-            className="w-full h-[350px] md:h-[400px] object-cover "
-          />
+      <div className="lg:flex lg:gap-3 lg:ml-6 lg:mr-6 lg:p-5">
+        <div className="relative mx-auto rounded-2xl overflow-hidden shadow-2xl max-w-4xl mb-10 group">
+          {/* Image wrapper to apply hover */}
+          <div className="overflow-hidden">
+            <img
+              src="/feature.jpg"
+              alt="featurejpg"
+              className="w-full h-[350px] md:h-[400px] object-cover transition-all duration-300 ease-in-out group-hover:scale-105"
+            />
+          </div>
 
+          {/* Overlay */}
           <div className="absolute inset-0 bg-black/40 flex flex-col justify-end p-6 md:p-10">
             <Link
               to="/react"
@@ -37,8 +41,12 @@ const Featured = () => {
         {/* Two Side Boxes */}
         <div className="flex flex-col md:flex-row gap-6 max-w-5xl mx-auto">
           {/* Left Box */}
-          <div className="flex-1  shadow-md rounded-xl overflow-hidden hover:shadow-xl transition-shadow">
-            <img src="/f2.jpg" alt="" className="w-full h-56 object-cover" />
+          <div className="flex-1 shadow-md rounded-xl overflow-hidden hover:shadow-xl transition-shadow">
+            <img
+              src="/f2.jpg"
+              alt=""
+              className="w-full h-56 object-cover hover:scale-105 transition-all ease duration-300"
+            />
             <div className="p-5 space-y-2">
               <p className="text-sm font-medium text-blue-600">Productivity</p>
               <h2 className="text-lg font-semibold hover:underline hover:decoration-red-500 transition-all">
@@ -50,8 +58,12 @@ const Featured = () => {
           </div>
 
           {/* Right Box */}
-          <div className="flex-1  shadow-md rounded-xl overflow-hidden hover:shadow-xl transition-shadow">
-            <img src="/f3.jpg" alt="" className="w-full h-56 object-cover" />
+          <div className="flex-1 shadow-md rounded-xl overflow-hidden hover:shadow-xl transition-shadow">
+            <img
+              src="/f3.jpg"
+              alt=""
+              className="w-full h-56 object-cover hover:scale-105 transition-all ease duration-300"
+            />
             <div className="p-5 space-y-2">
               <p className="text-sm font-medium text-green-600">Code Quality</p>
               <h2 className="text-lg font-semibold hover:underline hover:decoration-red-500">
