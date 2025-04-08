@@ -1,13 +1,13 @@
 import React from "react";
 import Hero from "../components/Hero";
 import Featured from "../components/Featured";
-import Posts from "../components/Posts";
+import PostList from "../components/PostList";
 const Home = () => {
   return (
     <div className="">
       <Hero />
       <Featured />
-      <Posts />
+      <PostList />
     </div>
   );
 };
