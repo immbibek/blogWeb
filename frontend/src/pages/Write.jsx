@@ -9,12 +9,23 @@ const Write = () => {
 
     setLoading(true);
     try {
-      // TODO: Replace this with actual OpenAI backend call
-      const fakeAIResponse = `## Introduction\nClean code is crucial for maintainability.\n\n### Benefits:\n- Easier to read\n- Easier to refactor\n- Fewer bugs`;
+      const res = await fetch("http://localhost:5000/api/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ title }),
+      });
 
-      setContent(fakeAIResponse);
+      const data = await res.json();
+      if (data.content) {
+        setContent(data.content);
+      } else {
+        alert("Failed to generate content");
+      }
     } catch (err) {
       console.error("AI generation failed", err);
+      alert("Something went wrong while generating content.");
     }
     setLoading(false);
   };
