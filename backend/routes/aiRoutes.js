@@ -1,8 +1,10 @@
-
+// routes/aiRoutes.js
 import express from "express";
 import { generateContent } from "../controllers/aiController.js";
 
 const router = express.Router();
-router.post("/", generateContent); // POST /api/generate
+
+// POST /api/generate
+router.post("/", generateContent);
 
 export default router;
