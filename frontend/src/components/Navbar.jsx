@@ -5,18 +5,38 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
 
+  // This useEffect should run only once on component mount
   useEffect(() => {
+    // Check if theme exists in localStorage
     const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      setIsDark(savedTheme === "dark");
-    }
+
+    // If there's a saved theme, use it; otherwise default to light
+    const darkMode = savedTheme === "dark";
+    setIsDark(darkMode);
+
+    // Apply the theme to the document body
+    applyTheme(darkMode);
   }, []);
 
+  // This useEffect runs whenever isDark state changes
   useEffect(() => {
+    // Save the current theme preference to localStorage
     localStorage.setItem("theme", isDark ? "dark" : "light");
-    document.body.style.backgroundColor = isDark ? "#1B1B1B" : "#FFFFFF";
-    document.body.style.color = isDark ? "#FFFFFF" : "#000000";
+
+    // Apply the theme changes
+    applyTheme(isDark);
   }, [isDark]);
+
+  // Helper function to apply theme changes
+  const applyTheme = (darkMode) => {
+    document.body.style.backgroundColor = darkMode ? "#1B1B1B" : "#FFFFFF";
+    document.body.style.color = darkMode ? "#FFFFFF" : "#000000";
+  };
+
+  // Toggle theme function
+  const toggleTheme = () => {
+    setIsDark((prevState) => !prevState);
+  };
 
   return (
     <header className="p-4 px-5 sm:px-10 flex justify-between items-center relative">
@@ -50,7 +70,7 @@ const Navbar = () => {
             <a href="/contact" onClick={() => setIsOpen(false)}>
               Contact
             </a>
-            <button onClick={() => setIsDark(!isDark)}>
+            <button onClick={toggleTheme}>
               {isDark ? <Sun size={18} /> : <Moon size={18} />}
             </button>
           </nav>
@@ -69,7 +89,7 @@ const Navbar = () => {
         <a href="/">Home</a>
         <a href="/write">write</a>
         <a href="/contact">Contact</a>
-        <button onClick={() => setIsDark(!isDark)}>
+        <button onClick={toggleTheme}>
           {isDark ? <Sun size={18} /> : <Moon size={18} />}
         </button>
       </nav>
@@ -78,7 +98,7 @@ const Navbar = () => {
       <div className="hidden sm:flex gap-4 items-center sm:mr-7">
         <a
           href="https://linkedin.com"
-          className="p-2 rounded-md  "
+          className="p-2 rounded-md"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -109,7 +129,7 @@ const Navbar = () => {
         </a>
         <a
           href="https://dribbble.com"
-          className="p-2 rounded-md "
+          className="p-2 rounded-md"
           target="_blank"
           rel="noopener noreferrer"
         >
