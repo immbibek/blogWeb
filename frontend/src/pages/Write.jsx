@@ -3,6 +3,7 @@ import PostEditor from "../components/PostEditor";
 
 const Write = () => {
   const [loading, setLoading] = useState(false);
+  const [posting, setPosting] = useState(false); // New state for publishing loading
 
   const handleAI = async (title, setContent) => {
     if (!title) return alert("Enter a title for AI to generate content!");
@@ -30,9 +31,29 @@ const Write = () => {
     setLoading(false);
   };
 
-  const handlePostSubmit = (data) => {
-    console.log("Submitting Post:", data);
-    // TODO: Send to backend
+  const handlePostSubmit = async (postData) => {
+    try {
+      setPosting(true);
+      const res = await fetch("http://localhost:5000/api/posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postData),
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        alert("Post published successfully!");
+        window.location.href = "/"; // Redirect to Home after posting
+      } else {
+        alert(data.error || "Failed to publish post.");
+      }
+    } catch (error) {
+      console.error("Post creation failed:", error);
+      alert("Something went wrong while publishing the post.");
+    }
+    setPosting(false);
   };
 
   return (
@@ -43,6 +64,7 @@ const Write = () => {
         onSubmit={handlePostSubmit}
         onGenerateAI={handleAI}
         aiLoading={loading}
+        posting={posting} // <-- Pass posting prop also
       />
     </div>
   );

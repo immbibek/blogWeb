@@ -1,32 +1,17 @@
-// components/PostEditor.jsx
-
-import React, { useState, useCallback } from "react";
-import { useDropzone } from "react-dropzone";
+import React, { useState } from "react";
 
 const PostEditor = ({ onSubmit, onGenerateAI, aiLoading }) => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
-  const [image, setImage] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
   const [date, setDate] = useState("");
   const [content, setContent] = useState("");
-
-  const onDrop = useCallback((acceptedFiles) => {
-    const file = acceptedFiles[0];
-    const previewUrl = URL.createObjectURL(file);
-    setImage({ file, preview: previewUrl });
-  }, []);
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop,
-    accept: { "image/*": [] },
-    multiple: false,
-  });
 
   const handleSubmit = () => {
     const postData = {
       title,
       category,
-      image: image?.preview || "",
+      image: imageUrl,
       date,
       content,
     };
@@ -34,73 +19,78 @@ const PostEditor = ({ onSubmit, onGenerateAI, aiLoading }) => {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="max-w-5xl mx-auto py-10 px-6">
+      {/* Title */}
       <input
         type="text"
-        placeholder="Post Title"
+        placeholder="Title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+        className="w-full text-5xl font-bold placeholder-gray-400 outline-none mb-8"
       />
 
-      <input
-        type="text"
-        placeholder="Category"
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
-        className="w-full px-4 py-2 border border-gray-300 rounded-lg"
-      />
-
-      <div
-        {...getRootProps()}
-        className={`w-full px-4 py-10 text-center border-2 border-dashed rounded-lg cursor-pointer ${
-          isDragActive ? "border-blue-500 bg-blue-50" : "border-gray-300"
-        }`}
-      >
-        <input {...getInputProps()} />
-        {image ? (
-          <img
-            src={image.preview}
-            alt="Preview"
-            className="mx-auto max-h-48 rounded-md object-cover"
-          />
-        ) : (
-          <p className="text-gray-500">
-            {isDragActive
-              ? "Drop the image here..."
-              : "Drag and drop an image here, or click to select"}
-          </p>
-        )}
+      {/* Category and Date */}
+      <div className="flex items-center justify-between mb-6 text-gray-500 text-sm">
+        <input
+          type="text"
+          placeholder="Category"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="outline-none"
+        />
+        <input
+          type="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+          className="outline-none"
+        />
       </div>
 
+      {/* Image URL */}
       <input
-        type="date"
-        value={date}
-        onChange={(e) => setDate(e.target.value)}
-        className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+        type="text"
+        placeholder="Paste Image URL (Optional)"
+        value={imageUrl}
+        onChange={(e) => setImageUrl(e.target.value)}
+        className="w-full mb-4 px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-300 outline-none"
       />
 
-      <button
-        onClick={() => onGenerateAI(title, setContent)}
-        disabled={aiLoading}
-        className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700"
-      >
-        {aiLoading ? "Generating..." : "✍️ Generate with AI"}
-      </button>
+      {/* Image Preview */}
+      {imageUrl && (
+        <div className="w-full h-[400px] mb-10 overflow-hidden rounded-lg">
+          <img
+            src={imageUrl}
+            alt="Preview"
+            className="w-full h-full object-cover"
+          />
+        </div>
+      )}
 
+      {/* Content */}
       <textarea
-        placeholder="Write your content here..."
+        placeholder="Tell your story..."
         value={content}
         onChange={(e) => setContent(e.target.value)}
-        className="w-full px-4 py-3 min-h-[200px] border border-gray-300 rounded-lg"
+        className="w-full min-h-[400px] text-lg leading-relaxed outline-none resize-none placeholder-gray-400"
       />
 
-      <button
-        onClick={handleSubmit}
-        className="mt-4 px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
-      >
-        Publish
-      </button>
+      {/* Buttons */}
+      <div className="flex gap-4 mt-10">
+        <button
+          onClick={() => onGenerateAI(title, setContent)}
+          disabled={aiLoading}
+          className="px-6 py-2 border-2 border-emerald-600 text-emerald-600 font-semibold rounded-full hover:bg-emerald-50 transition-all disabled:opacity-50"
+        >
+          {aiLoading ? "Generating..." : "✨ Generate with AI"}
+        </button>
+
+        <button
+          onClick={handleSubmit}
+          className="px-6 py-2 bg-emerald-600 text-white font-semibold rounded-full hover:bg-emerald-700 transition-all"
+        >
+          🚀 Publish
+        </button>
+      </div>
     </div>
   );
 };
