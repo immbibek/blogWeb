@@ -8,7 +8,7 @@ import Post from "./pages/Post";
 import PostDetails from "./pages/PostDetails";
 import { ThemeProvider } from "./ThemeContext";
 import Contact from "./pages/Contact";
-import WebDev from "./pages/WevDev";
+import WevDev from "./pages/wevdev";
 const App = () => {
   return (
     <ThemeProvider>
@@ -22,7 +22,7 @@ const App = () => {
             <Route path="/write" element={<Write />} />
             <Route path="/contact" element={<Contact />} />
 
-            <Route path="/wevdev" element={<WebDev />} />
+            <Route path="/wevdev" element={<WevDev />} />
           </Routes>
         </div>
       </Router>
