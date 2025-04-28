@@ -12,7 +12,7 @@ const PostDetails = () => {
 
     const fetchPost = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/posts/${id}`);
+        const res = await axios.get(`https://blogwebbackend-8gyj.onrender.com/api/posts/${id}`);
         if (res.data.success) {
           setPost(res.data.post); // Match the response field name with your backend
         } else {

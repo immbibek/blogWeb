@@ -10,7 +10,7 @@ const Write = () => {
 
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/generate", {
+      const res = await fetch("https://blogwebbackend-8gyj.onrender.com/api/generate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,7 +34,7 @@ const Write = () => {
   const handlePostSubmit = async (postData) => {
     try {
       setPosting(true);
-      const res = await fetch("http://localhost:5000/api/posts", {
+      const res = await fetch("https://blogwebbackend-8gyj.onrender.com/api/posts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
