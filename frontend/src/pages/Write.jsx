@@ -10,7 +10,7 @@ const Write = () => {
 
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/generate", {
+      const res = await fetch("https://blogwebbackend-8gyj.onrender.com/api/generate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
