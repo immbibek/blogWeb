@@ -5,8 +5,6 @@ import PostCard from "../components/PostsCard"; // Make sure this path is correc
 const Posts = () => {
   const { posts } = useContext(PostContext);
 
-  console.log("Posts in component:", posts);
-
   return (
     <section className="w-full px-4 py-10">
       <h1 className="text-2xl md:text-3xl font-bold mb-8 lg:ml-6">

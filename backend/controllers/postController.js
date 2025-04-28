@@ -40,7 +40,7 @@ export const getSingle = async (req, res) => {
 
     res.json({ success: true, post: singlePost });
   } catch (error) {
-    console.log(error);
+    
     res.status(500).json({ error: "Failed to fetch the post", message: error.message });
   }
 };

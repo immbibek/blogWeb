@@ -12,7 +12,6 @@ export const ThemeProvider = ({ children }) => {
 
       return window.matchMedia("(prefers-color-scheme: dark)").matches;
     } catch (error) {
-      console.error("Error accessing localStorage:", error);
       return false; // Default to light theme
     }
   };
@@ -24,7 +23,6 @@ export const ThemeProvider = ({ children }) => {
     // Update localStorage
     try {
       localStorage.setItem("theme", isDark ? "dark" : "light");
-      console.log("Theme saved to localStorage:", isDark ? "dark" : "light");
     } catch (error) {
       console.error("Error saving to localStorage:", error);
     }

@@ -30,7 +30,7 @@ export const generateContent = async (req, res) => {
     const content = data.choices[0]?.message?.content || "No content generated.";
     res.status(200).json({ content });
   } catch (err) {
-    console.error(err.message);
+    
     res.status(500).json({ error: "Content generation failed." });
   }
 };

@@ -1,9 +1,6 @@
 import { Link } from "react-router-dom";
 
 const PostCard = ({ post }) => {
-  console.log(`this is post from  post card ${post}`);
-  console.log(`hello ${post._id}`); // Log post._id to check its value
-
   return (
     <div className="group shadow-md rounded-lg overflow-hidden">
       <img
