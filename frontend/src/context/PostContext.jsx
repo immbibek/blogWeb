@@ -11,7 +11,7 @@ export const PostProvider = ({ children }) => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/posts");
+        const res = await axios.get("https://blogwebbackend-8gyj.onrender.com/api/posts");
 
         setPosts(res.data);
         setLoading(false);
