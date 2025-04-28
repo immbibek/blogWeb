@@ -23,7 +23,7 @@ const Featured = () => {
           {/* Overlay */}
           <div className="absolute inset-0 bg-black/40 flex flex-col justify-end p-6 md:p-10">
             <Link
-              to="/react"
+              to="/wevdev"
               className="inline-block bg-black text-white font-semibold px-4 py-2 rounded-full border border-white mb-4 w-fit hover:bg-white hover:text-black transition-colors"
             >
               JavaScript

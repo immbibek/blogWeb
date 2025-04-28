@@ -5,7 +5,12 @@ import Post from "../pages/Post";
 const Home = () => {
   return (
     <div className="">
-      <Hero />
+      <Hero
+        image="/banner.jpg"
+        category="Web Development"
+        link="/wevdev"
+        title="Building Progressive Web Apps: Bridging The Gap Between Web And Mobile"
+      />
       <Featured />
       <Post />
     </div>
